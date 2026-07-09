@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: HomeProps) {
           </a>
           <nav
             className="hidden items-center gap-5 text-sm text-[var(--ink-soft)] md:flex"
-            aria-label="Primary"
+            aria-label={t(copy.nav.primary, lang)}
           >
             <a href={`#about`} className="hover:text-[var(--ink)]">
               {t(copy.nav.about, lang)}

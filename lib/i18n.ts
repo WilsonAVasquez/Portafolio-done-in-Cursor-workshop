@@ -26,6 +26,7 @@ const translations = {
     publications: { es: "Publicaciones", en: "Publications" },
     teaching: { es: "Docencia", en: "Teaching" },
     contact: { es: "Contacto", en: "Contact" },
+    primary: { es: "Navegación principal", en: "Primary navigation" },
     langLabel: { es: "Idioma", en: "Language" },
     english: { es: "English", en: "English" },
     spanish: { es: "Español", en: "Español" },
