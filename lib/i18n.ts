@@ -21,31 +21,41 @@ const translations = {
     },
   },
   nav: {
-    about: { es: "Sobre mi trabajo", en: "About my work" },
+    about: { es: "Sobre mi trabajo", en: "About" },
     research: { es: "Investigación", en: "Research" },
     publications: { es: "Publicaciones", en: "Publications" },
+    trajectory: { es: "Trayectoria", en: "Trajectory" },
     teaching: { es: "Docencia", en: "Teaching" },
+    talks: { es: "Charlas", en: "Talks" },
+    students: { es: "Estudiantes", en: "Students" },
     contact: { es: "Contacto", en: "Contact" },
     primary: { es: "Navegación principal", en: "Primary navigation" },
     langLabel: { es: "Idioma", en: "Language" },
-    english: { es: "English", en: "English" },
-    spanish: { es: "Español", en: "Español" },
+    english: { es: "EN", en: "EN" },
+    spanish: { es: "ES", en: "ES" },
+    menuOpen: { es: "Abrir menú", en: "Open menu" },
+    menuClose: { es: "Cerrar menú", en: "Close menu" },
   },
   hero: {
-    name: { es: "Wilson A. Vásquez, PhD", en: "Wilson A. Vásquez, PhD" },
+    name: { es: "Wilson A. Vásquez", en: "Wilson A. Vásquez" },
+    credential: { es: "PhD", en: "PhD" },
+    field: {
+      es: "Sistemas eléctricos de potencia",
+      en: "Electrical power systems",
+    },
     role: {
-      es: "Profesor Titular, Departamento de Energía Eléctrica, Escuela Politécnica Nacional",
-      en: "Full Professor, Department of Electrical Energy, Escuela Politécnica Nacional",
+      es: "Profesor Titular · Departamento de Energía Eléctrica · Escuela Politécnica Nacional",
+      en: "Full Professor · Department of Electrical Energy · Escuela Politécnica Nacional",
     },
     focus: {
-      es: "Sistemas eléctricos de potencia: confiabilidad, mantenimiento y retiro de activos envejecidos, y generación distribuida.",
-      en: "Electrical power systems: reliability, maintenance and retirement of ageing assets, and distributed generation.",
-    },
-    tagline: {
       es: "Modelo fallas, priorizo mantenimiento y ayudo a planificar el retiro de equipos eléctricos de potencia.",
       en: "I model failures, prioritize maintenance, and help plan the retirement of power system equipment.",
     },
-    cta: { es: "Contáctame", en: "Contact me" },
+    cta: { es: "Escribirme", en: "Get in touch" },
+    ctaSecondary: {
+      es: "Ver publicaciones",
+      en: "See publications",
+    },
     photoAlt: {
       es: "Placeholder elegante para el retrato de Wilson A. Vásquez, PhD. Reemplazar con una fotografía profesional.",
       en: "Elegant placeholder for the portrait of Wilson A. Vásquez, PhD. Replace with a professional photograph.",
@@ -53,6 +63,10 @@ const translations = {
     photoCredit: {
       es: "Foto: placeholder — reemplazar con retrato propio.",
       en: "Photo: placeholder — replace with your own portrait.",
+    },
+    motifLabel: {
+      es: "Curva de bañera · confiabilidad de activos",
+      en: "Bathtub curve · asset reliability",
     },
   },
   about: {
@@ -74,6 +88,7 @@ const translations = {
     },
     items: [
       {
+        code: "REL",
         title: {
           es: "Confiabilidad de activos envejecidos",
           en: "Reliability of ageing assets",
@@ -84,6 +99,7 @@ const translations = {
         },
       },
       {
+        code: "RISK",
         title: {
           es: "Mantenimiento y retiro basados en riesgo",
           en: "Risk-based maintenance and retirement",
@@ -94,6 +110,7 @@ const translations = {
         },
       },
       {
+        code: "DG",
         title: {
           es: "Generación distribuida y regulación",
           en: "Distributed generation and regulation",
@@ -104,6 +121,7 @@ const translations = {
         },
       },
       {
+        code: "SEIS",
         title: {
           es: "Refuerzo de transmisión y riesgo sísmico",
           en: "Transmission reinforcement and seismic risk",
@@ -127,6 +145,7 @@ const translations = {
     },
     venueLabel: { es: "Medio", en: "Venue" },
     yearLabel: { es: "Año", en: "Year" },
+    featuredLabel: { es: "Destacada", en: "Featured" },
     items: [
       {
         title: {
@@ -139,18 +158,7 @@ const translations = {
         },
         year: "2024",
         href: "https://doi.org/10.37116/revistaenergia.v21.n1.2024.655",
-      },
-      {
-        title: {
-          es: "A Study of Repairable Failure Models of Aging Underground Power Distribution Cables",
-          en: "A Study of Repairable Failure Models of Aging Underground Power Distribution Cables",
-        },
-        venue: {
-          es: "IEEE PES ISGT Europe",
-          en: "IEEE PES ISGT Europe",
-        },
-        year: "2021",
-        href: "https://ieeexplore.ieee.org/abstract/document/9639956",
+        featured: false,
       },
       {
         title: {
@@ -163,6 +171,20 @@ const translations = {
         },
         year: "2020",
         href: "https://doi.org/10.1049/iet-gtd.2020.1006",
+        featured: true,
+      },
+      {
+        title: {
+          es: "A Study of Repairable Failure Models of Aging Underground Power Distribution Cables",
+          en: "A Study of Repairable Failure Models of Aging Underground Power Distribution Cables",
+        },
+        venue: {
+          es: "IEEE PES ISGT Europe",
+          en: "IEEE PES ISGT Europe",
+        },
+        year: "2021",
+        href: "https://ieeexplore.ieee.org/abstract/document/9639956",
+        featured: false,
       },
       {
         title: {
@@ -175,6 +197,7 @@ const translations = {
         },
         year: "2020",
         href: "https://doi.org/10.1109/PMAPS47429.2020.9183566",
+        featured: false,
       },
       {
         title: {
@@ -187,6 +210,7 @@ const translations = {
         },
         year: "2018",
         href: "https://doi.org/10.1109/PESGM.2018.8586012",
+        featured: false,
       },
       {
         title: {
@@ -199,6 +223,71 @@ const translations = {
         },
         year: "2022",
         href: "https://etheses.bham.ac.uk/id/eprint/12627/",
+        featured: true,
+      },
+    ],
+  },
+  trajectory: {
+    title: { es: "Trayectoria académica", en: "Academic trajectory" },
+    intro: {
+      es: "Momentos que marcan el camino entre industria, investigación y docencia.",
+      en: "Milestones along the path between industry, research, and teaching.",
+    },
+    items: [
+      {
+        year: "2023–",
+        title: {
+          es: "Profesor Titular, Escuela Politécnica Nacional",
+          en: "Full Professor, Escuela Politécnica Nacional",
+        },
+        detail: {
+          es: "Departamento de Energía Eléctrica. Cursos de Alto Voltaje y Electromagnetismo.",
+          en: "Department of Electrical Energy. Courses in High Voltage and Electromagnetism.",
+        },
+      },
+      {
+        year: "2023",
+        title: {
+          es: "Regulación ARCERNNR-008/23 · ARCONEL",
+          en: "Regulation ARCERNNR-008/23 · ARCONEL",
+        },
+        detail: {
+          es: "Participación en el marco regulatorio para generación distribuida de autoconsumo en Ecuador.",
+          en: "Contribution to the regulatory framework for distributed generation for self-consumption in Ecuador.",
+        },
+      },
+      {
+        year: "2022",
+        title: {
+          es: "PhD, University of Birmingham",
+          en: "PhD, University of Birmingham",
+        },
+        detail: {
+          es: "Tesis sobre mantenimiento y retiro de activos envejecidos y refuerzo de transmisión con riesgo sísmico.",
+          en: "Thesis on maintenance and retirement of ageing assets and transmission reinforcement under seismic risk.",
+        },
+      },
+      {
+        year: "2018–21",
+        title: {
+          es: "Publicaciones IEEE / IET sobre confiabilidad",
+          en: "IEEE / IET publications on reliability",
+        },
+        detail: {
+          es: "Modelos de falla, priorización de cables y reemplazo de transformadores bajo riesgo.",
+          en: "Failure models, cable prioritization, and risk-based transformer replacement.",
+        },
+      },
+      {
+        year: "2014–",
+        title: {
+          es: "Docencia e industria en Ecuador",
+          en: "Teaching and industry in Ecuador",
+        },
+        detail: {
+          es: "Más de una década entre operación de sistemas, regulación y formación de ingenieros.",
+          en: "More than a decade across system operation, regulation, and engineering education.",
+        },
       },
     ],
   },
@@ -273,6 +362,135 @@ const translations = {
       },
     ],
   },
+  talks: {
+    title: { es: "Charlas y medios", en: "Talks & media" },
+    intro: {
+      es: "Conferencias, paneles y menciones. Los ítems marcados como ejemplo son plantillas para reemplazar.",
+      en: "Talks, panels, and mentions. Items marked as examples are placeholders to replace.",
+    },
+    exampleLabel: { es: "Ejemplo", en: "Example" },
+    items: [
+      {
+        year: "2024",
+        title: {
+          es: "Confiabilidad de activos en redes de distribución",
+          en: "Asset reliability in distribution networks",
+        },
+        venue: {
+          es: "Ejemplo — Seminario IEEE PES Ecuador",
+          en: "Example — IEEE PES Ecuador Seminar",
+        },
+        type: { es: "Conferencia invitada", en: "Invited talk" },
+        example: true,
+      },
+      {
+        year: "2023",
+        title: {
+          es: "Generación distribuida y el marco ARCERNNR-008/23",
+          en: "Distributed generation and the ARCERNNR-008/23 framework",
+        },
+        venue: {
+          es: "Ejemplo — Panel técnico ARCONEL / academia",
+          en: "Example — ARCONEL / academia technical panel",
+        },
+        type: { es: "Panel", en: "Panel" },
+        example: true,
+      },
+      {
+        year: "2022",
+        title: {
+          es: "Retiro de equipos envejecidos bajo riesgo sísmico",
+          en: "Retiring ageing equipment under seismic risk",
+        },
+        venue: {
+          es: "Ejemplo — University of Birmingham Research Showcase",
+          en: "Example — University of Birmingham Research Showcase",
+        },
+        type: { es: "Ponencia", en: "Presentation" },
+        example: true,
+      },
+    ],
+  },
+  quotes: {
+    kicker: { es: "Colaboración", en: "Collaboration" },
+    title: { es: "Voces cercanas", en: "Nearby voices" },
+    intro: {
+      es: "Fragmentos de estudiantes y colaboradores. Reemplaza estos ejemplos con citas reales.",
+      en: "Notes from students and collaborators. Replace these examples with real quotes.",
+    },
+    exampleLabel: { es: "Ejemplo", en: "Example" },
+    items: [
+      {
+        quote: {
+          es: "Wilson explica modelos de falla con la misma claridad con la que diseña un experimento: paso a paso, sin atajos.",
+          en: "Wilson explains failure models with the same clarity he brings to an experiment: step by step, without shortcuts.",
+        },
+        attribution: {
+          es: "Ejemplo — estudiante de Alto Voltaje, EPN",
+          en: "Example — High Voltage student, EPN",
+        },
+      },
+      {
+        quote: {
+          es: "En la regulación de generación distribuida aportó criterio técnico y paciencia para traducir ingeniería a lenguaje normativo.",
+          en: "On distributed-generation regulation he brought technical judgment and the patience to turn engineering into policy language.",
+        },
+        attribution: {
+          es: "Ejemplo — colega en regulación energética",
+          en: "Example — colleague in energy regulation",
+        },
+      },
+    ],
+  },
+  faq: {
+    title: { es: "Preguntas para estudiantes", en: "Questions for students" },
+    intro: {
+      es: "Respuestas breves para quien quiera cursar, investigar o hacer tesis conmigo.",
+      en: "Short answers for anyone interested in courses, research, or a thesis with me.",
+    },
+    items: [
+      {
+        q: {
+          es: "¿Puedo hacer tesis o proyecto de investigación contigo?",
+          en: "Can I do a thesis or research project with you?",
+        },
+        a: {
+          es: "Sí, si tu tema toca confiabilidad de activos, mantenimiento basado en riesgo o generación distribuida. Escríbeme con una idea de una página y tu historial académico. (Ejemplo — ajusta según tu disponibilidad real.)",
+          en: "Yes, if your topic touches asset reliability, risk-based maintenance, or distributed generation. Email me a one-page idea and your academic record. (Example — adjust to your real availability.)",
+        },
+      },
+      {
+        q: {
+          es: "¿Qué cursos impartes este semestre?",
+          en: "Which courses are you teaching this semester?",
+        },
+        a: {
+          es: "Alto Voltaje y Electromagnetismo en la Escuela Politécnica Nacional. Los horarios oficiales están en el portal de la facultad.",
+          en: "High Voltage and Electromagnetism at Escuela Politécnica Nacional. Official schedules are on the faculty portal.",
+        },
+      },
+      {
+        q: {
+          es: "¿Ofreces prácticas o colaboración con industria?",
+          en: "Do you offer internships or industry collaboration?",
+        },
+        a: {
+          es: "Cuando hay proyectos activos con empresas o reguladores, aviso a estudiantes avanzados. Si representas una organización, escribe con el problema y el plazo. (Ejemplo.)",
+          en: "When active projects with utilities or regulators open up, I notify advanced students. If you represent an organization, write with the problem and timeline. (Example.)",
+        },
+      },
+      {
+        q: {
+          es: "¿En qué idioma puedo escribirte?",
+          en: "Which language can I write in?",
+        },
+        a: {
+          es: "Español o inglés. Respondo en el idioma en que me escribas.",
+          en: "Spanish or English. I reply in the language you use.",
+        },
+      },
+    ],
+  },
   contact: {
     title: { es: "Contacto", en: "Contact" },
     intro: {
@@ -299,8 +517,8 @@ const translations = {
   },
   footer: {
     note: {
-      es: "Portafolio académico de Wilson A. Vásquez, PhD · Quito, Ecuador",
-      en: "Academic portfolio of Wilson A. Vásquez, PhD · Quito, Ecuador",
+      es: "Wilson A. Vásquez, PhD · Quito, Ecuador",
+      en: "Wilson A. Vásquez, PhD · Quito, Ecuador",
     },
   },
 } as const;

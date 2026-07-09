@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Instrument_Serif } from "next/font/google";
 import { resolveLang, translations, t } from "@/lib/i18n";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const plexSans = IBM_Plex_Sans({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const instrumentSerif = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["500", "600"],
   display: "swap",
 });
 
@@ -48,7 +57,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${sourceSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${instrumentSerif.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans text-ink">
         {children}
