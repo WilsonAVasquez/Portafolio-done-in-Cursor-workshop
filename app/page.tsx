@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { BathtubCurve } from "@/components/BathtubCurve";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { Reveal } from "@/components/Reveal";
 import { resolveLang, translations, t } from "@/lib/i18n";
 
 type HomeProps = {
@@ -11,84 +13,99 @@ export default async function Home({ searchParams }: HomeProps) {
   const lang = resolveLang(params.lang);
   const copy = translations;
 
+  const navItems = [
+    { href: "#about", label: t(copy.nav.about, lang) },
+    { href: "#research", label: t(copy.nav.research, lang) },
+    { href: "#publications", label: t(copy.nav.publications, lang) },
+    { href: "#trajectory", label: t(copy.nav.trajectory, lang) },
+    { href: "#teaching", label: t(copy.nav.teaching, lang) },
+    { href: "#talks", label: t(copy.nav.talks, lang) },
+    { href: "#students", label: t(copy.nav.students, lang) },
+    { href: "#contact", label: t(copy.nav.contact, lang) },
+  ];
+
+  const featuredPubs = copy.publications.items.filter((p) => p.featured);
+  const otherPubs = copy.publications.items.filter((p) => !p.featured);
+  const orderedPubs = [...featuredPubs, ...otherPubs];
+
   return (
     <div className="site-shell">
       <header className="site-header">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+        <div className="site-header__bar mx-auto max-w-6xl px-5 sm:px-8">
           <a
             href="#top"
-            className="font-display text-sm font-semibold tracking-tight text-[var(--ink)] sm:text-base"
+            className="font-display text-[0.95rem] tracking-tight text-[var(--ink)] sm:text-base"
           >
             {t(copy.hero.name, lang)}
           </a>
           <nav
-            className="hidden items-center gap-5 text-sm text-[var(--ink-soft)] md:flex"
+            className="hidden items-center gap-5 lg:flex"
             aria-label={t(copy.nav.primary, lang)}
           >
-            <a href={`#about`} className="hover:text-[var(--ink)]">
-              {t(copy.nav.about, lang)}
-            </a>
-            <a href={`#research`} className="hover:text-[var(--ink)]">
-              {t(copy.nav.research, lang)}
-            </a>
-            <a href={`#publications`} className="hover:text-[var(--ink)]">
-              {t(copy.nav.publications, lang)}
-            </a>
-            <a href={`#teaching`} className="hover:text-[var(--ink)]">
-              {t(copy.nav.teaching, lang)}
-            </a>
-            <a href={`#contact`} className="hover:text-[var(--ink)]">
+            {navItems.slice(0, 5).map((item) => (
+              <a key={item.href} href={item.href} className="nav-link">
+                {item.label}
+              </a>
+            ))}
+            <a href="#contact" className="nav-link">
               {t(copy.nav.contact, lang)}
             </a>
           </nav>
           <LanguageSwitcher lang={lang} />
         </div>
+        <nav
+          className="mobile-nav border-t border-[var(--line)] lg:hidden"
+          aria-label={t(copy.nav.primary, lang)}
+        >
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <main id="top">
         <section className="hero" aria-labelledby="hero-name">
+          <div className="hero-copy">
+            <BathtubCurve className="hero-motif motion-fade-in" />
+            <div className="hero-copy-inner">
+              <p className="hero-field motion-fade-up">
+                {t(copy.hero.field, lang)}
+              </p>
+              <h1 id="hero-name" className="hero-name motion-fade-up motion-fade-up-delay">
+                {t(copy.hero.name, lang)}
+                <span className="hero-credential">{t(copy.hero.credential, lang)}</span>
+              </h1>
+              <p className="hero-role motion-fade-up motion-fade-up-delay">
+                {t(copy.hero.role, lang)}
+              </p>
+              <p className="hero-focus motion-fade-up motion-fade-up-delay-2">
+                {t(copy.hero.focus, lang)}
+              </p>
+              <div className="hero-actions motion-fade-up motion-fade-up-delay-3">
+                <a href="#contact" className="btn-primary">
+                  {t(copy.hero.cta, lang)}
+                </a>
+                <a href="#publications" className="btn-secondary">
+                  {t(copy.hero.ctaSecondary, lang)} →
+                </a>
+              </div>
+              <p className="mt-8 font-mono-label text-[0.68rem] tracking-[0.12em] text-[var(--muted)] uppercase">
+                {t(copy.hero.motifLabel, lang)}
+              </p>
+            </div>
+          </div>
           <div className="hero-media motion-hero-media">
             <Image
               src="/wilson-vasquez.png"
               alt={t(copy.hero.photoAlt, lang)}
               fill
               priority
-              sizes="(max-width: 959px) 100vw, 50vw"
+              sizes="(max-width: 959px) 100vw, 46vw"
               className="object-cover object-top"
             />
-          </div>
-          <div className="hero-copy">
-            <h1
-              id="hero-name"
-              className="motion-fade-up font-display text-[2.35rem] leading-[1.05] tracking-tight text-[var(--ink)] sm:text-5xl lg:text-[3.5rem]"
-            >
-              {t(copy.hero.name, lang)}
-            </h1>
-            <p className="motion-fade-up motion-fade-up-delay mt-4 max-w-xl text-base font-medium leading-snug text-[var(--teal)] sm:text-lg">
-              {t(copy.hero.role, lang)}
-            </p>
-            <p className="motion-fade-up motion-fade-up-delay-2 mt-5 max-w-xl text-lg leading-relaxed text-[var(--ink-soft)] sm:text-xl">
-              {t(copy.hero.focus, lang)}
-            </p>
-            <p className="motion-fade-up motion-fade-up-delay-2 mt-3 max-w-xl text-base leading-relaxed text-[var(--muted)]">
-              {t(copy.hero.tagline, lang)}
-            </p>
-            <div className="motion-fade-up motion-fade-up-delay-3 mt-8 flex flex-wrap items-center gap-4">
-              <a href="#contact" className="btn-primary">
-                {t(copy.hero.cta, lang)}
-              </a>
-              <a
-                href={copy.contact.links[0].href}
-                className="btn-secondary text-sm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t(copy.publications.scholarCta, lang)}
-              </a>
-            </div>
-            <p className="mt-6 text-xs text-[var(--muted)]">
-              {t(copy.hero.photoCredit, lang)}
-            </p>
+            <p className="hero-photo-credit">{t(copy.hero.photoCredit, lang)}</p>
           </div>
         </section>
 
@@ -98,48 +115,47 @@ export default async function Home({ searchParams }: HomeProps) {
           aria-labelledby="about-title"
         >
           <div className="mx-auto max-w-3xl px-5 sm:px-8">
-            <p className="section-kicker">{t(copy.nav.about, lang)}</p>
-            <h2
-              id="about-title"
-              className="font-display text-3xl tracking-tight text-[var(--ink)] sm:text-4xl"
-            >
-              {t(copy.about.title, lang)}
-            </h2>
-            <p className="mt-4 text-xl leading-relaxed text-[var(--teal)]">
-              {t(copy.about.lead, lang)}
-            </p>
-            <p className="mt-5 text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              {t(copy.about.body, lang)}
-            </p>
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.about, lang)}</p>
+              <h2 id="about-title" className="section-title">
+                {t(copy.about.title, lang)}
+              </h2>
+              <p className="mt-5 font-display text-xl leading-snug text-[var(--steel-deep)] sm:text-2xl">
+                {t(copy.about.lead, lang)}
+              </p>
+              <p className="mt-6 text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
+                {t(copy.about.body, lang)}
+              </p>
+            </Reveal>
           </div>
         </section>
 
         <section
           id="research"
-          className="section border-t border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_70%,transparent)]"
+          className="section section-band border-t border-[var(--line)]"
           aria-labelledby="research-title"
         >
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
-            <p className="section-kicker">{t(copy.nav.research, lang)}</p>
-            <h2
-              id="research-title"
-              className="max-w-2xl font-display text-3xl tracking-tight text-[var(--ink)] sm:text-4xl"
-            >
-              {t(copy.research.title, lang)}
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              {t(copy.research.intro, lang)}
-            </p>
-            <div className="research-grid mt-10">
-              {copy.research.items.map((item) => (
-                <article key={t(item.title, "en")} className="research-card">
-                  <h3 className="font-display text-xl text-[var(--ink)]">
-                    {t(item.title, lang)}
-                  </h3>
-                  <p className="mt-3 text-[0.975rem] leading-relaxed text-[var(--ink-soft)]">
-                    {t(item.body, lang)}
-                  </p>
-                </article>
+          <div className="mx-auto max-w-5xl px-5 sm:px-8">
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.research, lang)}</p>
+              <h2 id="research-title" className="section-title max-w-2xl">
+                {t(copy.research.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.research.intro, lang)}</p>
+            </Reveal>
+            <div className="research-list">
+              {copy.research.items.map((item, index) => (
+                <Reveal key={item.code} delayMs={index * 60}>
+                  <article className="research-item">
+                    <span className="research-code" aria-hidden>
+                      {item.code}
+                    </span>
+                    <div>
+                      <h3>{t(item.title, lang)}</h3>
+                      <p>{t(item.body, lang)}</p>
+                    </div>
+                  </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -151,75 +167,103 @@ export default async function Home({ searchParams }: HomeProps) {
           aria-labelledby="publications-title"
         >
           <div className="mx-auto max-w-3xl px-5 sm:px-8">
-            <p className="section-kicker">{t(copy.nav.publications, lang)}</p>
-            <h2
-              id="publications-title"
-              className="font-display text-3xl tracking-tight text-[var(--ink)] sm:text-4xl"
-            >
-              {t(copy.publications.title, lang)}
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              {t(copy.publications.intro, lang)}
-            </p>
-            <ul className="mt-8">
-              {copy.publications.items.map((pub) => (
-                <li key={pub.href} className="pub-item">
-                  <span className="font-display text-lg text-[var(--brass)]">
-                    {pub.year}
-                  </span>
-                  <div>
-                    <a
-                      href={pub.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base font-semibold leading-snug text-[var(--ink)] hover:text-[var(--teal)] sm:text-lg"
-                    >
-                      {t(pub.title, lang)}
-                    </a>
-                    <p className="mt-1 text-sm text-[var(--muted)]">
-                      <span className="sr-only">
-                        {t(copy.publications.venueLabel, lang)}:{" "}
-                      </span>
-                      {t(pub.venue, lang)}
-                    </p>
-                  </div>
-                </li>
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.publications, lang)}</p>
+              <h2 id="publications-title" className="section-title">
+                {t(copy.publications.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.publications.intro, lang)}</p>
+            </Reveal>
+            <ul className="pub-list">
+              {orderedPubs.map((pub, index) => (
+                <Reveal key={pub.href} delayMs={index * 40}>
+                  <li className={`pub-item${pub.featured ? " is-featured" : ""}`}>
+                    <span className="pub-year">{pub.year}</span>
+                    <div>
+                      {pub.featured ? (
+                        <span className="pub-badge">
+                          {t(copy.publications.featuredLabel, lang)}
+                        </span>
+                      ) : null}
+                      <a
+                        href={pub.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="pub-title"
+                      >
+                        {t(pub.title, lang)}
+                      </a>
+                      <p className="pub-meta">
+                        <span className="sr-only">
+                          {t(copy.publications.venueLabel, lang)}:{" "}
+                        </span>
+                        {t(pub.venue, lang)}
+                      </p>
+                    </div>
+                  </li>
+                </Reveal>
               ))}
             </ul>
-            <a
-              href={copy.contact.links[0].href}
-              className="btn-secondary mt-8 inline-flex"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t(copy.publications.scholarCta, lang)} →
-            </a>
+            <Reveal>
+              <a
+                href={copy.contact.links[0].href}
+                className="btn-secondary mt-8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(copy.publications.scholarCta, lang)} →
+              </a>
+            </Reveal>
+          </div>
+        </section>
+
+        <section
+          id="trajectory"
+          className="section section-band border-t border-[var(--line)]"
+          aria-labelledby="trajectory-title"
+        >
+          <div className="mx-auto max-w-3xl px-5 sm:px-8">
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.trajectory, lang)}</p>
+              <h2 id="trajectory-title" className="section-title">
+                {t(copy.trajectory.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.trajectory.intro, lang)}</p>
+            </Reveal>
+            <ol className="timeline">
+              {copy.trajectory.items.map((item, index) => (
+                <Reveal key={`${item.year}-${index}`} delayMs={index * 50}>
+                  <li className="timeline-item">
+                    <span className="timeline-year">{item.year}</span>
+                    <h3>{t(item.title, lang)}</h3>
+                    <p>{t(item.detail, lang)}</p>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
           </div>
         </section>
 
         <section
           id="teaching"
-          className="section border-t border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_70%,transparent)]"
+          className="section border-t border-[var(--line)]"
           aria-labelledby="teaching-title"
         >
           <div className="mx-auto max-w-3xl px-5 sm:px-8">
-            <p className="section-kicker">{t(copy.nav.teaching, lang)}</p>
-            <h2
-              id="teaching-title"
-              className="font-display text-3xl tracking-tight text-[var(--ink)] sm:text-4xl"
-            >
-              {t(copy.teaching.title, lang)}
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              {t(copy.teaching.intro, lang)}
-            </p>
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.teaching, lang)}</p>
+              <h2 id="teaching-title" className="section-title">
+                {t(copy.teaching.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.teaching.intro, lang)}</p>
+            </Reveal>
             <ul className="mt-8">
               {copy.teaching.courses.map((course) => (
                 <li
                   key={`${t(course.name, "en")}-${course.status}`}
-                  className="course-row"
+                  className={`course-row${course.status === "past" ? " is-past" : ""}`}
                 >
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brass)]">
+                  <span className="course-status">
                     {course.status === "current"
                       ? t(copy.teaching.currentLabel, lang)
                       : t(copy.teaching.pastLabel, lang)}
@@ -239,43 +283,133 @@ export default async function Home({ searchParams }: HomeProps) {
         </section>
 
         <section
+          id="talks"
+          className="section section-band border-t border-[var(--line)]"
+          aria-labelledby="talks-title"
+        >
+          <div className="mx-auto max-w-3xl px-5 sm:px-8">
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.talks, lang)}</p>
+              <h2 id="talks-title" className="section-title">
+                {t(copy.talks.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.talks.intro, lang)}</p>
+            </Reveal>
+            <ul className="mt-8">
+              {copy.talks.items.map((talk) => (
+                <li key={t(talk.title, "en")} className="talk-row">
+                  <span className="pub-year">{talk.year}</span>
+                  <div>
+                    <p className="font-mono-label text-[0.7rem] tracking-[0.12em] text-[var(--muted)] uppercase">
+                      {t(talk.type, lang)}
+                      {talk.example ? (
+                        <span className="example-tag">
+                          {t(copy.talks.exampleLabel, lang)}
+                        </span>
+                      ) : null}
+                    </p>
+                    <p className="mt-1 font-semibold text-[var(--ink)]">
+                      {t(talk.title, lang)}
+                    </p>
+                    <p className="mt-1 text-sm text-[var(--muted)]">
+                      {t(talk.venue, lang)}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="quotes"
+          className="section border-t border-[var(--line)]"
+          aria-labelledby="quotes-title"
+        >
+          <div className="mx-auto max-w-5xl px-5 sm:px-8">
+            <Reveal>
+              <p className="section-kicker">{t(copy.quotes.kicker, lang)}</p>
+              <h2 id="quotes-title" className="section-title">
+                {t(copy.quotes.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.quotes.intro, lang)}</p>
+            </Reveal>
+            <div className="quote-grid">
+              {copy.quotes.items.map((item, index) => (
+                <Reveal key={t(item.attribution, "en")} delayMs={index * 80}>
+                  <figure className="quote-block">
+                    <blockquote>
+                      <p>“{t(item.quote, lang)}”</p>
+                    </blockquote>
+                    <figcaption className="mt-4 text-sm text-[var(--muted)]">
+                      {t(item.attribution, lang)}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="students"
+          className="section section-band border-t border-[var(--line)]"
+          aria-labelledby="faq-title"
+        >
+          <div className="mx-auto max-w-3xl px-5 sm:px-8">
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.students, lang)}</p>
+              <h2 id="faq-title" className="section-title">
+                {t(copy.faq.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.faq.intro, lang)}</p>
+            </Reveal>
+            <div className="faq-list">
+              {copy.faq.items.map((item) => (
+                <Reveal key={t(item.q, "en")}>
+                  <div className="faq-item">
+                    <h3>{t(item.q, lang)}</h3>
+                    <p>{t(item.a, lang)}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
           id="contact"
           className="section border-t border-[var(--line)]"
           aria-labelledby="contact-title"
         >
           <div className="mx-auto max-w-4xl px-5 sm:px-8">
-            <p className="section-kicker">{t(copy.nav.contact, lang)}</p>
-            <h2
-              id="contact-title"
-              className="font-display text-3xl tracking-tight text-[var(--ink)] sm:text-4xl"
-            >
-              {t(copy.contact.title, lang)}
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
-              {t(copy.contact.intro, lang)}
-            </p>
-            <div className="contact-panel mt-10">
+            <Reveal>
+              <p className="section-kicker">{t(copy.nav.contact, lang)}</p>
+              <h2 id="contact-title" className="section-title">
+                {t(copy.contact.title, lang)}
+              </h2>
+              <p className="section-lead">{t(copy.contact.intro, lang)}</p>
+            </Reveal>
+            <div className="contact-panel">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brass)]">
-                  {t(copy.contact.emailLabel, lang)}
-                </p>
+                <p className="contact-label">{t(copy.contact.emailLabel, lang)}</p>
                 <a
                   href={`mailto:${copy.contact.email}`}
-                  className="mt-2 inline-block font-display text-2xl text-[var(--ink)] hover:text-[var(--teal)] sm:text-3xl"
+                  className="contact-email"
                 >
                   {copy.contact.email}
                 </a>
-                <div className="mt-6">
+                <div className="mt-7">
                   <a href={`mailto:${copy.contact.email}`} className="btn-primary">
                     {t(copy.hero.cta, lang)}
                   </a>
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brass)]">
+                <p className="contact-label">
                   {t(copy.contact.profilesLabel, lang)}
                 </p>
-                <ul className="mt-3 space-y-2">
+                <ul className="profile-links">
                   {copy.contact.links.map((link) => (
                     <li key={link.href}>
                       <a
